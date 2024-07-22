@@ -21,7 +21,7 @@ public class AccountService {
     /**
      * Register a new account entity.
      * @param newAccount 
-     * @return account entity without account_id.
+     * @return account entity without the generated account_id.
      * @throws UsernameAlreadyExistsException in case username existed
      * @throws RequirementsNotMetException in case username is blank or null, and password length is less than 4.
      */
