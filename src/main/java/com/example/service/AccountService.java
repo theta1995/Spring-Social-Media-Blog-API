@@ -1,7 +1,6 @@
 package com.example.service;
 
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.example.entity.Account;
 import com.example.exception.RequirementsNotMetException;
@@ -25,7 +24,6 @@ public class AccountService {
      * @throws UsernameAlreadyExistsException in case username existed
      * @throws RequirementsNotMetException in case username is blank or null, and password length is less than 4.
      */
-    @Transactional
     public Account registerAccount(Account newAccount) {
 
         if (newAccount.getUsername() == "" || newAccount.getUsername() == null || newAccount.getPassword().length() < 4) {
