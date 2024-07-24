@@ -85,4 +85,13 @@ public class MessageService {
         int updatedRow = messageRepository.updateMessageByIdAndGetCount(messageId, messageText);
         return updatedRow == 0 ? null : updatedRow;
     }
+
+    /**
+     * Retrieve all message associated with the poster's id.
+     * @param accountId
+     * @return a list of messages
+     */
+    public List<Message> getAllMessagesByAccountId(int accountId) {
+        return messageRepository.findAllByPostedBy(accountId);
+    }
 }

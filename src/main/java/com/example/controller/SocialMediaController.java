@@ -5,7 +5,6 @@ import java.util.List;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -77,6 +76,11 @@ public class SocialMediaController {
     @PatchMapping("/messages/{messageId}")
     public ResponseEntity<Integer> updateMessageByMessageIdController(@RequestBody Message message, @PathVariable int messageId) {
         return ResponseEntity.ok(messageService.updateMessageByMessageId(messageId, message.getMessageText()));
+    }
+
+    @GetMapping("/accounts/{accountId}/messages")
+    public ResponseEntity<List<Message>> getAllMessagesByAccountIdController(@PathVariable int accountId) {
+        return ResponseEntity.ok(messageService.getAllMessagesByAccountId(accountId)); 
     }
 
 }

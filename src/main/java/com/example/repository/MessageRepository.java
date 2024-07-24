@@ -15,11 +15,12 @@ import com.example.entity.Message;
 @Repository
 public interface MessageRepository extends CrudRepository<Message, Integer> {
     
-    List<Message> findAllByPostedBy(String postedBy);
+    List<Message> findAllByPostedBy(int postedBy);
     
     @Transactional
     @Modifying
-    @Query(nativeQuery = true, value = "DELETE FROM message WHERE message.messageId = :messageId")
+    @Query(nativeQuery = true, 
+        value = "DELETE FROM message WHERE message.messageId = :messageId")
     Integer deleteByIdAndGetCount(@Param("messageId") int employeeId);
 
     @Transactional
