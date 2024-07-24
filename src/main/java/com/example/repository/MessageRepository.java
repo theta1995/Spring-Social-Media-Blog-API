@@ -2,8 +2,6 @@ package com.example.repository;
 
 import java.util.List;
 
-import javax.transaction.Transactional;
-
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -17,13 +15,11 @@ public interface MessageRepository extends CrudRepository<Message, Integer> {
     
     List<Message> findAllByPostedBy(int postedBy);
     
-    @Transactional
     @Modifying
-    @Query(nativeQuery = true, 
+    @Query(nativeQuery = true,
         value = "DELETE FROM message WHERE message.messageId = :messageId")
-    Integer deleteByIdAndGetCount(@Param("messageId") int employeeId);
+        Integer deleteByIdAndGetCount(@Param("messageId") int messageId);
 
-    @Transactional
     @Modifying
     @Query(nativeQuery = true, 
         value = "UPDATE message m SET m.messageText = :messageText WHERE m.messageId = :messageId")

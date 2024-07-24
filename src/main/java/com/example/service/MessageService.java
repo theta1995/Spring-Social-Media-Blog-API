@@ -3,7 +3,8 @@ package com.example.service;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.transaction.Transactional;
+
 import org.springframework.stereotype.Service;
 
 import com.example.entity.Message;
@@ -17,7 +18,6 @@ public class MessageService {
     private MessageRepository messageRepository;
     private AccountRepository accountRepository;
 
-    @Autowired
     protected MessageService(MessageRepository messageRepository, AccountRepository accountRepository) {
         this.messageRepository = messageRepository;
         this.accountRepository = accountRepository;
@@ -29,6 +29,7 @@ public class MessageService {
      * @return the created message entitiy with its generated id.
      * @throws RequirementsNotMetException in case message is empty, over 255 characters or poster doesn't exist.
      */
+    @Transactional
     public Message createMessage(Message message) {
         String messageText = message.getMessageText();
         if (messageText == null || messageText == "" || messageText.length() > 255) {
@@ -64,6 +65,7 @@ public class MessageService {
      * @param messageId
      * @return return null if no rows are affected, otherwise the number of affected rows.
      */
+    @Transactional
     public Integer deleteMessageByMessageId(int messageId) {
         int updatedRow = messageRepository.deleteByIdAndGetCount(messageId);
         return updatedRow == 0 ? null : updatedRow;
@@ -75,6 +77,7 @@ public class MessageService {
      * @param messageText
      * @return return null if no rows are affected, otherwise the number of affected rows.
      */
+    @Transactional
     public Integer updateMessageByMessageId(int messageId, String messageText) {
         if (!messageRepository.existsById(messageId) ||
             messageText == null ||

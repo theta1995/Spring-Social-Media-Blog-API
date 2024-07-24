@@ -1,9 +1,7 @@
 package com.example.service;
 
-import org.h2.security.auth.AuthenticationException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.HttpClientErrorException.Unauthorized;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.example.entity.Account;
 import com.example.exception.RequirementsNotMetException;
@@ -16,7 +14,6 @@ public class AccountService {
 
     private AccountRepository accountRepository;
 
-    @Autowired
     protected AccountService(AccountRepository accountRepository) {
         this.accountRepository = accountRepository;
     }
@@ -28,6 +25,7 @@ public class AccountService {
      * @throws UsernameAlreadyExistsException in case username existed
      * @throws RequirementsNotMetException in case username is blank or null, and password length is less than 4.
      */
+    @Transactional
     public Account registerAccount(Account newAccount) {
 
         if (newAccount.getUsername() == "" || newAccount.getUsername() == null || newAccount.getPassword().length() < 4) {
