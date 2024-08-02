@@ -17,7 +17,7 @@ In our hypothetical micro-blogging or messaging app, any user should be able to 
 - User can delete and update messages.
 
 # To Start
-- Git clone the repository
+- Clone the repository
 - In the working folder ``` mvn install ``` to install dependencies
 - Run the program, the server should start on ```http://localhost:8080 ```
 
